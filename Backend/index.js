@@ -5,6 +5,11 @@ import dotenv from "dotenv";
 import { connect } from "mongoose";
 import connectDB from "./utils/db.js"
 import userRoute from "./routes/user.route.js"
+import postRoute from "./routes/post.route.js"
+import messageRoute from "./routes/message.route.js"
+
+
+console.log("hola mundo");
 
 dotenv.config({})
 const app = express()
@@ -29,6 +34,8 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.use("/api/v2/user", userRoute);
+app.use("/api/v2/post", postRoute);
+app.use("/api/v2/message", messageRoute);
 
 app.listen(PORT,()=>{
     connectDB();
