@@ -85,7 +85,7 @@ const CreatePost = ({ open, setOpen }) => {
                 Please wait
               </Button>
             ) : (
-              <Button onClick={createPostHandler} type="submit" className="w-full">Post</Button>
+              <Button onClick={createPostHandler} type="submit" className="bg-gray-900 text-white w-full">Post</Button>
             )
           )
         }
