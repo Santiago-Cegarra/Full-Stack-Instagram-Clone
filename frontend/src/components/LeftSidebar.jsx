@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Heart, Home, LogOut, MessageCircle, PlusSquare, Search, TrendingUp } from "lucide-react";
 import { toast } from "sonner";
 import axios from "axios";
