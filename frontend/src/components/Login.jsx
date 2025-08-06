@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Loader2 } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { setAuthUser } from "@/redux/authSlice";
-
+import logo from "@/assets/loguitoo.png"
 
 const Login = () => {
     const [input, setInput] = useState({
@@ -55,7 +55,14 @@ const Login = () => {
         <div className="flex items-center w-screen h-screen justify-center">
             <form onSubmit={signupHandler} className="shadow-lg flex flex-col gap-5 p-8">
                 <div className="my-4">
-                    <h1 className="text-center font-bod text-xl">LOGO</h1>
+                    <div className="text-center mb-2">
+                        <h1 className="font-bold text-xl text-center">TerraGram</h1>
+                        <img 
+                            src={logo} 
+                            alt="Logo" 
+                            className="h-21 w-auto mx-auto" // Ajusta el tamaño según necesites
+                        />
+                    </div>
                     <p className="text-sm text-center">Login to see Photos & Videos from your friends</p>
                 </div>
                 <div>
@@ -80,7 +87,7 @@ const Login = () => {
                             <Loader2 className="mr-2 h-4 w-4 animate-spin"/>
                             Please Wait 
                         </Button>
-                    ) :(<Button type="submit">Login</Button>)
+                    ) :(<Button className="text-white bg-gray-900" type="submit">Login</Button>)
                 }
                 <span className="text-center">Dont have an account? <Link to="/signup" 
                 className="text-blue-600">Register</Link> </span>

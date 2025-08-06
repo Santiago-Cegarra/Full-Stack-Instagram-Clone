@@ -6,31 +6,33 @@ import { toast } from 'sonner';
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { Loader2 } from "lucide-react";
+import logo from "@/assets/loguitoo.png"
+
 
 const Signup = () => {
     const [input, setInput] = useState({
-        username:"",
-        email:"",
-        password:""
+        username: "",
+        email: "",
+        password: ""
     });
-    
-    const [loading,setLoading] = useState(false);
+
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate()
-    const changeEventHandler = (e) =>{
-        setInput({...input, [e.target.name]:e.target.value});
+    const changeEventHandler = (e) => {
+        setInput({ ...input, [e.target.name]: e.target.value });
     }
     const signupHandler = async (e) => {
         e.preventDefault();
         console.log(input);
         try {
-            setLoading(true);            
-            const res = await axios.post('http://localhost:8000/api/v2/user/register',input, {
-                headers:{
-                    'Content-Type':'application/json'
+            setLoading(true);
+            const res = await axios.post('http://localhost:8000/api/v2/user/register', input, {
+                headers: {
+                    'Content-Type': 'application/json'
                 },
-                withCredentials:true
+                withCredentials: true
             });
-            if(res.data.success){
+            if (res.data.success) {
                 navigate("/login")
                 toast.success(res.data.message);
                 setInput({
@@ -42,52 +44,57 @@ const Signup = () => {
         } catch (error) {
             console.log(error)
             toast.error(error.response.data.message)
-        } finally{
+        } finally {
             setLoading(false);
         }
     }
 
-    return(
+    return (
         <div className="flex items-center w-screen h-screen justify-center">
             <form onSubmit={signupHandler} className="shadow-lg flex flex-col gap-5 p-8">
                 <div className="my-4">
-                    <h1 className="text-center font-bod text-xl">LOGO</h1>
-                    <p className="text-sm text-center">SignUp to see Photos & Videos from your friends</p>
+                    <h1 className="font-bold text-xl text-center">TerraGram</h1>
+                    <img
+                        src={logo}
+                        alt="Logo"
+                        className="h-21 w-auto mx-auto" // Ajusta el tamaño según necesites
+                    />
                 </div>
+                <p className="text-sm text-center">SignUp to see Photos & Videos from your friends</p>
                 <div>
                     <span className="font-medium">Username</span>
                     <Input type="text"
-                    name="username"
-                    value={input.username}
-                    onChange = {changeEventHandler}
-                    className="focus-visible:ring-transparent my-2"/>
+                        name="username"
+                        value={input.username}
+                        onChange={changeEventHandler}
+                        className="focus-visible:ring-transparent my-2" />
                 </div>
                 <div>
                     <span className="font-medium">Email</span>
                     <Input type="text"
-                    name="email"
-                    value={input.email}
-                    onChange = {changeEventHandler}
-                    className="focus-visible:ring-transparent my-2"/>
+                        name="email"
+                        value={input.email}
+                        onChange={changeEventHandler}
+                        className="focus-visible:ring-transparent my-2" />
                 </div>
                 <div>
                     <span className="font-medium">Password</span>
                     <Input type="password"
-                    name="password"
-                    value={input.password}
-                    onChange = {changeEventHandler}
-                    className="focus-visible:ring-transparent my-2"/>
+                        name="password"
+                        value={input.password}
+                        onChange={changeEventHandler}
+                        className="focus-visible:ring-transparent my-2" />
                 </div>
-                  {
+                {
                     loading ? (
                         <Button>
-                            <Loader2 className="mr-2 h-4 w-4 animate-spin"/>
-                            Please Wait 
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            Please Wait
                         </Button>
-                    ) :(<Button type="submit">Sign Up</Button>)
+                    ) : (<Button type="submit">Sign Up</Button>)
                 }
-                <span className="text-center">Already have an account? <Link to="/login" 
-                className="text-blue-600">Log in</Link> </span>
+                <span className="text-center">Already have an account? <Link to="/login"
+                    className="text-blue-600">Log in</Link> </span>
             </form>
         </div>
     )

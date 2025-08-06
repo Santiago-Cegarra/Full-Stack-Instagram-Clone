@@ -9,13 +9,15 @@ import { setAuthUser } from "@/redux/authSlice";
 import store from "@/redux/store";
 import CreatePost from "./CreatePost";
 import { setPosts, setSelectedPost } from "@/redux/postSlice";
+import logo from "@/assets/loguitoo.png"
+
 
 const LeftSidebar = () => {
     const navigate = useNavigate();
-    const {user} = useSelector(store=>store.auth)
+    const { user } = useSelector(store => store.auth)
     const dispatch = useDispatch();
 
-    const[open,setOpen] = useState(false);
+    const [open, setOpen] = useState(false);
 
     const logoutHandler = async () => {
         try {
@@ -36,13 +38,13 @@ const LeftSidebar = () => {
     const sidebarHandler = (textType) => {
         if (textType === 'Logout') {
             logoutHandler();
-        }else if(textType === 'Create') {
+        } else if (textType === 'Create') {
             setOpen(true);
-        }else if (textType === "Profile") {
+        } else if (textType === "Profile") {
             navigate(`/profile/${user?._id}`)
-        }else if (textType === "Home") {
+        } else if (textType === "Home") {
             navigate("/");
-        }else if (textType === "Messages") {
+        } else if (textType === "Messages") {
             navigate("/chat");
         }
     }
@@ -56,7 +58,7 @@ const LeftSidebar = () => {
         {
             icon: (
                 <Avatar className='w-10 h-10'>
-                    <AvatarImage src={user?.profilePicture}alt="@shadcn" />
+                    <AvatarImage src={user?.profilePicture} alt="@shadcn" />
                     <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
             ), text: "Profile"
@@ -67,10 +69,17 @@ const LeftSidebar = () => {
     ]
 
     return (
-        
+
         <div className="fixed top-0 z-10 left-0 px-4 border-r border-gray-300 w-[16%] h-screen">
             <div className="flex flex-col">
-                <h1 className="my-8 pl-3 font-bold text-xl">LOGO</h1>
+                <div className="my-4">
+                    <h1 className="font-bold text-xl text-center">TerraGram</h1>
+                    <img
+                        src={logo}
+                        alt="Logo"
+                        className="h-21 w-auto mx-auto" // Ajusta el tamaño según necesites
+                    />
+                </div>
                 <div>
                     {
                         sidebarItems.map((item, index) => {
@@ -84,8 +93,8 @@ const LeftSidebar = () => {
                     }
                 </div>
             </div>
-            <CreatePost open={open} setOpen={setOpen}/>
-        </div> 
+            <CreatePost open={open} setOpen={setOpen} />
+        </div>
     )
 }
 export default LeftSidebar;

@@ -1,15 +1,18 @@
 import React from "react";
 import Post from "./Post";
 import { useSelector } from "react-redux";
-import store from "@/redux/store";
-const Posts = () =>{
-    const {posts} = useSelector(store=>store.post);
-    return(
-        <div>
-            {
-                posts.map((post) => <Post key={post._id} post={post} />)
-            }
-        </div>
-    )
-}
-export default Posts
+
+const Posts = () => {
+  const { posts } = useSelector(store => store.post);
+
+  return (
+    <div>
+      {posts.map(post => (
+        // Ahora solo pasamos postId en lugar de post completo
+        <Post key={post._id} postId={post._id} />
+      ))}
+    </div>
+  );
+};
+
+export default Posts;
